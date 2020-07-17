@@ -10,6 +10,9 @@ namespace TrashCollectorProject.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -24,12 +27,17 @@ namespace TrashCollectorProject.Data
             {
                 Name = "Admin",
                 NormalizedName = "ADMIN"
+            }, new IdentityRole
+            {
+                Name = "Employee",
+                NormalizedName = "EMPLOYEE"
+            },new IdentityRole
+            {
+                Name = "Customer",
+                NormalizedName = "CUSTOMER"
             }
             );
         }
 
-        public DbSet<TrashCollectorProject.Models.Customer> Customer { get; set; }
-
-        public DbSet<TrashCollectorProject.Models.Employee> Employee { get; set; }
     }
 }

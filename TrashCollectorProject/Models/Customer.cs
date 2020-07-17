@@ -10,6 +10,9 @@ namespace TrashCollectorProject.Models
 {
     public class Customer
     {
+       // customer adress figure out where it should be
+       // foreign key?
+        
         [Key]
         public int Id { get; set; }
         public string FirstName { get; set; }

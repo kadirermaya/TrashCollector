@@ -20,11 +20,14 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public int ZipCode { get; set; }
-       
+
+
         [ForeignKey("User")]
         [Display(Name = "User Name")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+
+
 
     }
 }
