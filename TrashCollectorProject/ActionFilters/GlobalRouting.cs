@@ -30,6 +30,7 @@ namespace TrashCollectorProject.ActionFilters
                     context.Result = new RedirectToActionResult("Index",
                     "Employees", null);
                 }
+
             }
         }
         public void OnActionExecuted(ActionExecutedContext context)

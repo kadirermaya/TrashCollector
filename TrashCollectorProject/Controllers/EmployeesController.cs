@@ -48,7 +48,7 @@ namespace TrashCollectorProject.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Adress");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace TrashCollectorProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", employee.CustomerId);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Adress", employee.CustomerId);
             return View(employee);
         }
 
@@ -82,7 +82,7 @@ namespace TrashCollectorProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", employee.CustomerId);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Adress", employee.CustomerId);
             return View(employee);
         }
 
@@ -118,7 +118,7 @@ namespace TrashCollectorProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", employee.CustomerId);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Adress", employee.CustomerId);
             return View(employee);
         }
 

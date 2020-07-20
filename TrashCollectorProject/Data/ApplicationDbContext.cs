@@ -25,10 +25,6 @@ namespace TrashCollectorProject.Data
             .HasData(
             new IdentityRole
             {
-                Name = "Admin",
-                NormalizedName = "ADMIN"
-            }, new IdentityRole
-            {
                 Name = "Employee",
                 NormalizedName = "EMPLOYEE"
             },new IdentityRole
