@@ -1,10 +1,11 @@
-﻿@model IEnumerable<TrashCollectorProject.Models.Employee>
+﻿@model IEnumerable<TrashCollectorProject.Models.Customer>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+<h3>Today`s Pickup</h3>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,8 +23,12 @@
                 @Html.DisplayNameFor(model => model.ZipCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer)
+                @Html.DisplayNameFor(model => model.PickUpDay)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -40,10 +45,14 @@
                 @Html.DisplayFor(modelItem => item.ZipCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.Adress)
+                @Html.DisplayFor(modelItem => item.PickUpDay)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+
+            <td>
+
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace TrashCollectorProject.Models
 {
@@ -21,12 +22,8 @@ namespace TrashCollectorProject.Models
         public string LastName { get; set; }
         public int ZipCode { get; set; }
 
-        [ForeignKey("User")]
-        [Display(Name = "User Name")]
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
-
-
-
+        [ForeignKey("IdentityUser")]
+        public string IdentityUserId { get; set; }
+        public IdentityUser IdentityUser { get; set; }
     }
 }

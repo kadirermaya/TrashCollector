@@ -48,15 +48,15 @@ namespace TrashCollectorProject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "75eceb79-276a-4b06-aa56-39f59130c6d8",
-                            ConcurrencyStamp = "8ebbe11d-5df0-458a-9d97-950346977d45",
+                            Id = "62414799-843c-46ac-a877-f01a427c0718",
+                            ConcurrencyStamp = "f57eaeff-5423-449f-a956-d92be7ac061d",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "50968a3a-1207-4b79-9408-bc89d744af3c",
-                            ConcurrencyStamp = "1c6f34be-fc1b-41ab-a7f0-4a1916424d92",
+                            Id = "ad75fe7b-3526-4dbb-a136-bb5e52e9b105",
+                            ConcurrencyStamp = "198de8ab-f90d-488d-8827-a0b4ab4bdabd",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -246,9 +246,6 @@ namespace TrashCollectorProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -269,12 +266,15 @@ namespace TrashCollectorProject.Migrations
                     b.Property<int>("PickUpDay")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SuspendEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("SuspendStartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ZipCode")
                         .IsRequired()
@@ -294,12 +294,12 @@ namespace TrashCollectorProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -309,7 +309,7 @@ namespace TrashCollectorProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Employees");
                 });
@@ -374,11 +374,9 @@ namespace TrashCollectorProject.Migrations
 
             modelBuilder.Entity("TrashCollectorProject.Models.Employee", b =>
                 {
-                    b.HasOne("TrashCollectorProject.Models.Customer", "Customer")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdentityUserId");
                 });
 #pragma warning restore 612, 618
         }

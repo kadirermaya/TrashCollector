@@ -52,10 +52,10 @@ namespace TrashCollectorProject.Models
         public DateTime? OneTimePickup { get; set; }
 
         [Display(Name = "Suspend Pickup Start Date")]
-        public DateTime? StartDate { get; set; }
+        public DateTime? SuspendStartDate { get; set; }
 
         [Display(Name = "Suspend Pickup End Date ")]
-        public DateTime? EndDate { get; set; }
+        public DateTime? SuspendEndDate { get; set; }
 
         [Display(Name = "Owed Amount")]
         public int? OwedAmount { get; set; }

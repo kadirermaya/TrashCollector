@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrashCollectorProject.Migrations
 {
-    public partial class migra : Migration
+    public partial class initmig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -167,8 +167,8 @@ namespace TrashCollectorProject.Migrations
                     ZipCode = table.Column<string>(nullable: false),
                     PickUpDay = table.Column<int>(nullable: false),
                     OneTimePickup = table.Column<DateTime>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: true),
-                    EndDate = table.Column<DateTime>(nullable: true),
+                    SuspendStartDate = table.Column<DateTime>(nullable: true),
+                    SuspendEndDate = table.Column<DateTime>(nullable: true),
                     OwedAmount = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -191,28 +191,28 @@ namespace TrashCollectorProject.Migrations
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: true),
                     ZipCode = table.Column<int>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false)
+                    IdentityUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        name: "FK_Employees_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "75eceb79-276a-4b06-aa56-39f59130c6d8", "8ebbe11d-5df0-458a-9d97-950346977d45", "Employee", "EMPLOYEE" });
+                values: new object[] { "62414799-843c-46ac-a877-f01a427c0718", "f57eaeff-5423-449f-a956-d92be7ac061d", "Employee", "EMPLOYEE" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "50968a3a-1207-4b79-9408-bc89d744af3c", "1c6f34be-fc1b-41ab-a7f0-4a1916424d92", "Customer", "CUSTOMER" });
+                values: new object[] { "ad75fe7b-3526-4dbb-a136-bb5e52e9b105", "198de8ab-f90d-488d-8827-a0b4ab4bdabd", "Customer", "CUSTOMER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -259,9 +259,9 @@ namespace TrashCollectorProject.Migrations
                 column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_CustomerId",
+                name: "IX_Employees_IdentityUserId",
                 table: "Employees",
-                column: "CustomerId");
+                column: "IdentityUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -282,13 +282,13 @@ namespace TrashCollectorProject.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
