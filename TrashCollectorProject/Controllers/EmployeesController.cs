@@ -31,8 +31,20 @@ namespace TrashCollectorProject.Controllers
 
             }
             var day = DateTime.Today.DayOfWeek;
-            var customerList = _context.Customers.Where(c => c.ZipCode == employee.ZipCode.ToString() && c.PickUpDay == day);
-            return View(await customerList.ToListAsync());
+            var customerList = _context.Customers.Where(c => c.ZipCode == employee.ZipCode.ToString() && c.PickUpDay == day).ToList();
+            return View(customerList);
+        }
+
+        
+        
+        // GET: Employees/SelectedDay
+        public async Task<IActionResult> SelectedDay(DayOfWeek selectedDay)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var customerList = _context.Customers.Where(c => c.ZipCode == employee.ZipCode.ToString() && c.PickUpDay == selectedDay);
+            
+            return View(customerList);
         }
 
         // GET: Employees/Details/5

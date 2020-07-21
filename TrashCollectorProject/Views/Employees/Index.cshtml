@@ -4,12 +4,31 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-<h3>Today`s Pickup</h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Today`s Pickups</h1>
+
+
+<form asp-action="SelectedDay">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label class="control-label"></label>
+        <p>Select a day to filter!</p>
+        <select name="selectedDay" class="form-control">
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+        </select>
+        <span class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    </div>
+
+</form>
 <table class="table">
     <thead>
         <tr>
