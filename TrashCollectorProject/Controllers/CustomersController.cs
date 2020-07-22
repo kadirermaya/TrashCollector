@@ -77,7 +77,7 @@ namespace TrashCollectorProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,OneTimePickup,StartDate,EndDate,OwedAmount")] Customer customer)
+        public async Task<IActionResult> Create(Customer customer)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
            
@@ -169,7 +169,7 @@ namespace TrashCollectorProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,OneTimePickup,StartDate,EndDate,OwedAmount")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,IsPickupConfirmed,OneTimePickup,StartDate,EndDate,Balance")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -202,7 +202,7 @@ namespace TrashCollectorProject.Controllers
         // POST: Customers/EditPickupDay/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPickupDay(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,OneTimePickup,StartDate,EndDate,OwedAmount")] Customer customer)
+        public async Task<IActionResult> EditPickupDay(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,IsPickupConfirmed,OneTimePickup,StartDate,EndDate,Balance")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -236,7 +236,7 @@ namespace TrashCollectorProject.Controllers
         // POST: Customers/OneTimePickup/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OneTimePickup(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,OneTimePickup,StartDate,EndDate,OwedAmount")] Customer customer)
+        public async Task<IActionResult> OneTimePickup(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,IsPickupConfirmed,OneTimePickup,StartDate,EndDate,Balance")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -270,7 +270,7 @@ namespace TrashCollectorProject.Controllers
         // POST: Customers/SuspendService/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SuspendService(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,OneTimePickup,StartDate,EndDate,OwedAmount")] Customer customer)
+        public async Task<IActionResult> SuspendService(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,IsPickupConfirmed,OneTimePickup,StartDate,EndDate,Balance")] Customer customer)
         {
             if (id != customer.Id)
             {

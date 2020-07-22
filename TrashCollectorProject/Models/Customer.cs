@@ -47,7 +47,9 @@ namespace TrashCollectorProject.Models
 
         [Display(Name = "Weekly Pickup Day")]
         public DayOfWeek PickUpDay { get; set; }
-        
+        [Display(Name = "Pickup Confirmed")]
+        public bool IsPickupConfirmed { get; set; }
+
         [Display(Name = "One Time Pickup")]
         public DateTime? OneTimePickup { get; set; }
 
@@ -57,8 +59,11 @@ namespace TrashCollectorProject.Models
         [Display(Name = "Suspend Pickup End Date ")]
         public DateTime? SuspendEndDate { get; set; }
 
-        [Display(Name = "Owed Amount")]
-        public int? OwedAmount { get; set; }
+        [Display(Name = "Balance")]
+        public int Balance { get; set; }
+
+
+
 
     }
 }

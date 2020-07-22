@@ -59,6 +59,12 @@
             @Html.DisplayFor(model => model.PickUpDay)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsPickupConfirmed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsPickupConfirmed)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OneTimePickup)
         </dt>
         <dd class = "col-sm-10">
@@ -77,10 +83,10 @@
             @Html.DisplayFor(model => model.SuspendEndDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OwedAmount)
+            @Html.DisplayNameFor(model => model.Balance)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OwedAmount)
+        <dd class = "col-sm-10"><span>$</span>
+            @Html.DisplayFor(model => model.Balance)
         </dd>
     </dl>
 </div>

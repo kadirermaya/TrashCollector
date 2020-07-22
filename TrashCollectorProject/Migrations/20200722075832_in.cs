@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrashCollectorProject.Migrations
 {
-    public partial class initmig : Migration
+    public partial class @in : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -166,10 +166,11 @@ namespace TrashCollectorProject.Migrations
                     State = table.Column<string>(nullable: false),
                     ZipCode = table.Column<string>(nullable: false),
                     PickUpDay = table.Column<int>(nullable: false),
+                    IsPickupConfirmed = table.Column<bool>(nullable: false),
                     OneTimePickup = table.Column<DateTime>(nullable: true),
                     SuspendStartDate = table.Column<DateTime>(nullable: true),
                     SuspendEndDate = table.Column<DateTime>(nullable: true),
-                    OwedAmount = table.Column<int>(nullable: true)
+                    Balance = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,12 +208,12 @@ namespace TrashCollectorProject.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "62414799-843c-46ac-a877-f01a427c0718", "f57eaeff-5423-449f-a956-d92be7ac061d", "Employee", "EMPLOYEE" });
+                values: new object[] { "792d74d7-9eeb-4734-9e09-5069b99be356", "33693a93-644e-4711-8619-d95a759fb4a5", "Employee", "EMPLOYEE" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ad75fe7b-3526-4dbb-a136-bb5e52e9b105", "198de8ab-f90d-488d-8827-a0b4ab4bdabd", "Customer", "CUSTOMER" });
+                values: new object[] { "9e870e4d-07c1-48b5-9aaa-f75f4281717b", "f0e29c4e-9b29-49ae-b010-426d5d73faa0", "Customer", "CUSTOMER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -6,9 +6,6 @@
 
 <h1>My Informations</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 <table class="table">
     <thead>
@@ -35,6 +32,9 @@
                 @Html.DisplayNameFor(model => model.PickUpDay)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.IsPickupConfirmed)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.OneTimePickup)
             </th>
             <th>
@@ -44,7 +44,7 @@
                 @Html.DisplayNameFor(model => model.SuspendEndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OwedAmount)
+                @Html.DisplayNameFor(model => model.Balance)
             </th>
             <th></th>
         </tr>
@@ -74,6 +74,9 @@
                 @Html.DisplayFor(modelItem => item.PickUpDay)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IsPickupConfirmed)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.OneTimePickup)
             </td>
             <td>
@@ -82,8 +85,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SuspendEndDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwedAmount)
+            <td><span>$</span>
+                @Html.DisplayFor(modelItem => item.Balance)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

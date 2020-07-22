@@ -10,8 +10,8 @@ using TrashCollectorProject.Data;
 namespace TrashCollectorProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200720213758_initmig")]
-    partial class initmig
+    [Migration("20200722075832_in")]
+    partial class @in
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollectorProject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "62414799-843c-46ac-a877-f01a427c0718",
-                            ConcurrencyStamp = "f57eaeff-5423-449f-a956-d92be7ac061d",
+                            Id = "792d74d7-9eeb-4734-9e09-5069b99be356",
+                            ConcurrencyStamp = "33693a93-644e-4711-8619-d95a759fb4a5",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "ad75fe7b-3526-4dbb-a136-bb5e52e9b105",
-                            ConcurrencyStamp = "198de8ab-f90d-488d-8827-a0b4ab4bdabd",
+                            Id = "9e870e4d-07c1-48b5-9aaa-f75f4281717b",
+                            ConcurrencyStamp = "f0e29c4e-9b29-49ae-b010-426d5d73faa0",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -244,6 +244,9 @@ namespace TrashCollectorProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Balance")
+                        .HasColumnType("int");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -255,15 +258,15 @@ namespace TrashCollectorProject.Migrations
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsPickupConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("OneTimePickup")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("OwedAmount")
-                        .HasColumnType("int");
 
                     b.Property<int>("PickUpDay")
                         .HasColumnType("int");
