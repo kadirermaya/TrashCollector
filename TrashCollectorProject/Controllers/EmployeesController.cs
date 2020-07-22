@@ -173,7 +173,7 @@ namespace TrashCollectorProject.Controllers
         //Employees/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmPickup(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,IsPickupConfirmed,OneTimePickup,StartDate,EndDate,OwedAmount")] Customer customer)
+        public async Task<IActionResult> ConfirmPickup(int id, [Bind("Id,IdentityUserId,FirstName,LastName,Adress,City,State,ZipCode,PickUpDay,IsPickupConfirmed,OneTimePickup,StartDate,EndDate,Balance")] Customer customer)
         {
             
             if (id != customer.Id)
@@ -185,7 +185,10 @@ namespace TrashCollectorProject.Controllers
             {
                 try
                 {
-                    customer.Balance += 10;
+                    if (customer.IsPickupConfirmed == true)
+                    {
+                        customer.Balance += 10;
+                    }
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
