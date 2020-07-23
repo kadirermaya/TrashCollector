@@ -48,15 +48,15 @@ namespace TrashCollectorProject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "792d74d7-9eeb-4734-9e09-5069b99be356",
-                            ConcurrencyStamp = "33693a93-644e-4711-8619-d95a759fb4a5",
+                            Id = "978e5519-74de-4500-b3e9-aac059e59018",
+                            ConcurrencyStamp = "b0df5ae2-e1af-41b7-bfd6-a876a397177e",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "9e870e4d-07c1-48b5-9aaa-f75f4281717b",
-                            ConcurrencyStamp = "f0e29c4e-9b29-49ae-b010-426d5d73faa0",
+                            Id = "4c8a8fc9-ab28-4f6e-aefb-82c5a28cdff9",
+                            ConcurrencyStamp = "bba8096a-f274-4aa3-a8b5-742f269eacdd",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -262,6 +262,12 @@ namespace TrashCollectorProject.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Lat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Long")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("OneTimePickup")
                         .HasColumnType("datetime2");

@@ -61,8 +61,10 @@ namespace TrashCollectorProject.Models
 
         [Display(Name = "Balance")]
         public int Balance { get; set; }
-
-
+        [Display(Name = "Lat")]
+        public double Lat { get; set; }
+        [Display(Name = "Long")]
+        public double Long { get; set; }
 
 
     }

@@ -35,8 +35,24 @@ namespace TrashCollectorProject.Controllers
             return View(customerList);
         }
 
-        
-        
+
+        // GET: GoogleMap
+        public async Task<IActionResult> GoogleMap()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            if (employee == null)
+            {
+                return RedirectToAction("Create");
+
+            }
+            var day = DateTime.Today.DayOfWeek;
+            var customerList = _context.Customers.Where(c => c.ZipCode == employee.ZipCode.ToString() && c.PickUpDay == day).ToList();
+            return View(customerList);
+        }
+
+
+
         // GET: Employees/SelectedDay
         public async Task<IActionResult> SelectedDay(DayOfWeek selectedDay)
         {
@@ -48,6 +64,24 @@ namespace TrashCollectorProject.Controllers
         }
 
         // GET: Employees/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var employee = await _context.Employees
+        //        .Include(e => e.IdentityUser)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (employee == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(employee);
+        //}
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -55,15 +89,18 @@ namespace TrashCollectorProject.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .Include(e => e.IdentityUser)
+            var customer = await _context.Customers
+                .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            ViewBag.lat = customer.Lat;
+            ViewBag.lng = customer.Long;
+
+            return View(customer);
         }
 
         // GET: Employees/Create

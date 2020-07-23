@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TrashCollectorProject.Data;
-using TrashCollectorProject.Models;
-
-namespace TrashCollectorProject.Controllers
+﻿namespace TrashCollectorProject.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using System.Xml.Linq;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore;
+    using Newtonsoft.Json;
+    using TrashCollectorProject.Data;
+    using TrashCollectorProject.Models;
+
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -80,15 +81,20 @@ namespace TrashCollectorProject.Controllers
         public async Task<IActionResult> Create(Customer customer)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-           
-            if(userId == null)
+
+            if (userId == null)
             {
                 return RedirectToAction("Register", "Account");
             }
 
             if (ModelState.IsValid)
             {
+                string address = $"{customer.Adress.Replace(" ", "+")},{customer.City.Replace(" ", "+")},{customer.State}+{customer.ZipCode}";
+                Location result = getGeoLocation(address);
                 customer.IdentityUserId = userId;
+                customer.Lat = result.lat;
+                customer.Long = result.lng;
+
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -113,6 +119,7 @@ namespace TrashCollectorProject.Controllers
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
+
         //GET: Customers/EditPickupDay/5
         public async Task<IActionResult> EditPickupDay(int? id)
         {
@@ -199,6 +206,7 @@ namespace TrashCollectorProject.Controllers
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
+
         // POST: Customers/EditPickupDay/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -300,8 +308,9 @@ namespace TrashCollectorProject.Controllers
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
-            // GET: Customers/Delete/5
-            public async Task<IActionResult> Delete(int? id)
+
+        // GET: Customers/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -333,6 +342,32 @@ namespace TrashCollectorProject.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.Id == id);
+        }
+
+        public class Location
+        {
+            public double lat;
+            public double lng;
+        }
+
+        public Location getGeoLocation(string address)
+        {
+            string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false", Uri.EscapeDataString(address), "AIzaSyBC3ZH8vE8CAQubDBdmbhmIsESxqzG1OZc");
+
+            WebRequest request = WebRequest.Create(requestUri);
+            WebResponse response = request.GetResponse();
+            XDocument xdoc = XDocument.Load(response.GetResponseStream());
+
+            XElement result = xdoc.Element("GeocodeResponse").Element("result");
+            XElement locationElement = result.Element("geometry").Element("location");
+            XElement lat = locationElement.Element("lat");
+            XElement lng = locationElement.Element("lng");
+
+            Location loc = new Location();
+            loc.lat = Convert.ToDouble(lat.ToString().Replace("<lat>", "").Replace("</lat>", ""));
+            loc.lng = Convert.ToDouble(lng.ToString().Replace("<lng>", "").Replace("</lng>", ""));
+
+            return loc;
         }
     }
 }
